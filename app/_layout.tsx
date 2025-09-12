@@ -1,29 +1,35 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { useAuth } from '@/hooks/useAuth';
+import { SplashScreen, Stack, router } from 'expo-router';
+import { useEffect } from 'react';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
+  const { isAuthenticated } = useAuth();
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  useEffect(() => {
+    if (isAuthenticated === null) {
+      return;
+    }
+
+    if (isAuthenticated) {
+      // Corrected: Redirect to the main app group, e.g., '/(main)'
+      router.replace('/(main)');
+    } else {
+      // Corrected: Redirect to the authentication group, which you have
+      router.replace('/(auth)');
+    }
+
+    SplashScreen.hideAsync();
+
+  }, [isAuthenticated]);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <Stack>
+      {/* This screen name must match your main app content folder name */}
+      <Stack.Screen name="(main)" options={{ headerShown: false }} /> 
+      {/* This screen name must match your auth folder name */}
+      <Stack.Screen name="(auth)" options={{ headerShown: false }} />
+    </Stack>
   );
 }
