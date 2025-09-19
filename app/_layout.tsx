@@ -14,7 +14,7 @@ export default function RootLayout() {
 
     if (isAuthenticated) {
       // Corrected: Redirect to the main app group, e.g., '/(main)'
-      router.replace('/(main)');
+      router.replace('/(main)/productManager');
     } else {
       // Corrected: Redirect to the authentication group, which you have
       router.replace('/(auth)');

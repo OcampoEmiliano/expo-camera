@@ -17,7 +17,7 @@ export default function LoginScreen() {
     if (username === 'test' && password === 'test') {
       await login('dummy-token');
       Alert.alert('Éxito', 'Inicio de sesión completado.');
-      router.replace('./(main)');
+      router.replace('/(main)/productManager');
     } else {
       Alert.alert('Error', 'Usuario o contraseña incorrectos.');
     }
