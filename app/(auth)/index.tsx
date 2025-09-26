@@ -13,11 +13,19 @@ export default function LoginScreen() {
     setIsLoading(true);
 
     await new Promise(resolve => setTimeout(resolve, 2000));
-
+if (!username || !password) {
+  Alert.alert('Error', 'Por favor, completa todos los campos.');
+  setIsLoading(false);
+  return;
+}
     if (username === 'test' && password === 'test') {
-      await login('dummy-token');
-      Alert.alert('Éxito', 'Inicio de sesión completado.');
-      router.replace('/(main)/productManager');
+  try {
+  await login('dummy-token');
+  Alert.alert('Éxito', 'Inicio de sesión completado.');
+  router.replace('/(main)/productManager');
+} catch (error) {
+  Alert.alert('Error', 'Hubo un problema al iniciar sesión.');
+}
     } else {
       Alert.alert('Error', 'Usuario o contraseña incorrectos.');
     }

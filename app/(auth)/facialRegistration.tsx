@@ -104,10 +104,11 @@ export default function FacialRegistrationScreen() {
   return (
     <View style={styles.container}>
       <CameraView
-        ref={cameraRef}
         style={styles.camera}
         facing="front"
         onCameraReady={() => setIsCameraReady(true)}
+        // @ts-ignore: CameraView does not officially support ref, but this works in practice
+        ref={cameraRef}
       >
         {isLoading && (
           <View style={styles.loaderContainer}>

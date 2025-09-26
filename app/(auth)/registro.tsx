@@ -8,8 +8,6 @@ export default function RegisterScreen() {
   const [cuil, setCuil] = useState('');
 
   const handleRegister = () => {
-    // Aquí puedes agregar validaciones para el CUIL, por ejemplo,
-    // que tenga la longitud y el formato correctos.
     if (!cuil) {
       Alert.alert('Error', 'Por favor, ingrese un CUIL.');
       return;

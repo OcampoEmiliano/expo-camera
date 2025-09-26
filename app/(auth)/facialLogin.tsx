@@ -71,7 +71,6 @@ export default function FacialLoginScreen() {
   return (
     <View style={styles.container}>
       <CameraView
-        ref={cameraRef}
         style={styles.camera}
         facing="front"
         onCameraReady={() => setIsCameraReady(true)}
