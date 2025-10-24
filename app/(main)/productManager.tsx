@@ -10,7 +10,7 @@ export default function ProductManagerScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Gestor de Productos</Text>
-      <Button title="Escanear Código" onPress={() => router.push('/+not-found')} />
+      <Button title="Escanear Código" onPress={() => router.push('/scanner')} />
       <FlatList
         data={products}
         keyExtractor={(item) => item.code}
